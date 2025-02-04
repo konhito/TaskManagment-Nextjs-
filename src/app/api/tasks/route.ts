@@ -36,14 +36,14 @@ export async function GET() {
       task: task,
     });
   } catch (error) {
-    console.log("error while retiving", error);
+    console.log("error while retriving", error);
   }
 }
 
 export async function PUT(req: Request) {
   await dbConnect();
   try {
-    const { id, title, description, date } = await req.json();
+    const { id, title, description } = await req.json();
 
     if (!id) {
       return NextResponse.json(
@@ -54,7 +54,7 @@ export async function PUT(req: Request) {
 
     const updatedTask = await Task.findByIdAndUpdate(
       id,
-      { title, description, date },
+      { title, description },
       { new: true, runValidators: true }
     );
 
