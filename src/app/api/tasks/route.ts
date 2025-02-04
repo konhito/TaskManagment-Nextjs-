@@ -7,6 +7,12 @@ export async function POST(req: Request) {
   try {
     const { title, description, date } = await req.json();
 
+    if (!title) {
+      return NextResponse.json({
+        msg: "title is required",
+      });
+    }
+
     const newTask = new Task({ title, description, date });
     await newTask.save();
 
@@ -21,7 +27,7 @@ export async function POST(req: Request) {
   }
 }
 
-//here
+//here getting all the response
 export async function GET() {
   await dbConnect();
   try {
@@ -37,7 +43,7 @@ export async function GET() {
 export async function PUT(req: Request) {
   await dbConnect();
   try {
-    const { id, title, description, date } = await req.json(); // Extract data from request body
+    const { id, title, description, date } = await req.json();
 
     if (!id) {
       return NextResponse.json(
@@ -49,7 +55,7 @@ export async function PUT(req: Request) {
     const updatedTask = await Task.findByIdAndUpdate(
       id,
       { title, description, date },
-      { new: true, runValidators: true } // Return updated task & validate input
+      { new: true, runValidators: true }
     );
 
     if (!updatedTask) {
@@ -63,6 +69,36 @@ export async function PUT(req: Request) {
   } catch (error) {
     return NextResponse.json(
       { error: "Failed to update task", details: error.message },
+      { status: 500 }
+    );
+  }
+}
+
+export async function DELETE(req: Request) {
+  await dbConnect();
+  try {
+    const { id } = await req.json();
+
+    if (!id) {
+      return NextResponse.json(
+        { error: "Task ID is required" },
+        { status: 400 }
+      );
+    }
+
+    const deleteTask = await Task.findByIdAndDelete(id);
+
+    if (!deleteTask) {
+      return NextResponse.json({ error: "Task not found" }, { status: 404 });
+    }
+
+    return NextResponse.json({
+      msg: "Task updated successfully",
+      task: deleteTask,
+    });
+  } catch (error) {
+    return NextResponse.json(
+      { error: "Failed to delete task", details: error.message },
       { status: 500 }
     );
   }
