@@ -31,6 +31,7 @@ export default function TaskList() {
       const data = await GetTask();
       if (data?.task) {
         setTasks(data.task);
+        localStorage.setItem("task", data.task);
       }
     } catch (error) {
       console.error("Error fetching tasks:", error);

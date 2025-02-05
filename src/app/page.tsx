@@ -3,8 +3,13 @@
 import { useRouter } from "next/navigation";
 import { BackgroundLines } from "@/components/ui/background-lines";
 import { ThemeProvider } from "../components/theme-context";
+import dbConnect from "@/lib/dbConnect";
+import { useEffect } from "react";
 
 export default function Home() {
+  useEffect(() => {
+    dbConnect();
+  }, []);
   const router = useRouter();
   return (
     <div>

@@ -32,6 +32,9 @@ export default function TaskForm() {
       console.error("Error submitting form:", error);
     }
   }
+  const handleReload = () => {
+    router.refresh();
+  };
 
   return (
     <div className="fixed bottom-10 right-20 z-50">
@@ -86,7 +89,7 @@ export default function TaskForm() {
             <button
               type="submit"
               className="bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600"
-              onClick={() => router.push("/tasks")}
+              onClick={handleReload}
             >
               Submit
             </button>
