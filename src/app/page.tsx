@@ -1,6 +1,5 @@
 "use client";
-import TaskForm from "@/components/TaskForm";
-import TaskList from "@/components/TaskList";
+
 import { useRouter } from "next/navigation";
 import { BackgroundLines } from "@/components/ui/background-lines";
 import { ThemeProvider } from "../components/theme-context";

@@ -7,13 +7,19 @@ import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function TaskList() {
-  const [tasks, setTasks] = useState([]);
+  type Task = {
+    _id: string;
+    title: string;
+    description: string;
+    completed: boolean;
+  };
+
+  const [tasks, setTasks] = useState<Task[]>([]);
   const [isEditing, setIsEditing] = useState(false);
   const [editedTask, setEditedTask] = useState({
     id: "",
     title: "",
     description: "",
-    dueDate: "",
   });
 
   useEffect(() => {
@@ -45,15 +51,14 @@ export default function TaskList() {
     }
   }
 
-  async function deleteTask(id) {
+  async function deleteTask(id: string) {
     try {
       await axios.delete(`${Backend_url}/api/tasks`, { data: { id } });
       fetchData();
     } catch (error) {
-      console.log("Unable to delete");
+      console.log("Unable to delete", error);
     }
   }
-
   return (
     <div className="max-w-2xl mx-auto p-6">
       <h1 className="text-3xl font-bold text-center mb-6">Task Managment</h1>
@@ -140,7 +145,10 @@ export default function TaskList() {
               <textarea
                 value={editedTask.description}
                 onChange={(e) =>
-                  setEditedTask({ ...editedTask, description: e.target.value })
+                  setEditedTask({
+                    ...editedTask,
+                    description: e.target.value,
+                  })
                 }
                 className="w-full p-2 border rounded-lg"
                 placeholder="Description"

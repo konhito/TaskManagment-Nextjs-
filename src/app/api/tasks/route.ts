@@ -22,7 +22,7 @@ export async function POST(req: Request) {
     });
   } catch (error) {
     return NextResponse.json(
-      { error: "Invalid request body", details: error.message },
+      { error: `Invalid request body ${error}` },
       { status: 400 }
     );
   }
@@ -69,7 +69,7 @@ export async function PUT(req: Request) {
     });
   } catch (error) {
     return NextResponse.json(
-      { error: "Failed to update task", details: error.message },
+      { error: `Failed to update task ${error}` },
       { status: 500 }
     );
   }
@@ -103,7 +103,7 @@ export async function DELETE(req: Request) {
     });
   } catch (error) {
     return NextResponse.json(
-      { error: "Failed to delete task", details: error.message },
+      { error: `Failed to delete task ${error}` },
       { status: 500 }
     );
   }
