@@ -5,9 +5,12 @@ import { motion } from "framer-motion";
 import axios from "axios";
 import Backend_url from "@/context/Backendurl";
 import { Plus, X } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function TaskForm() {
   const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
+
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [date, setDate] = useState("");
@@ -83,6 +86,7 @@ export default function TaskForm() {
             <button
               type="submit"
               className="bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600"
+              onClick={() => router.push("/tasks")}
             >
               Submit
             </button>
