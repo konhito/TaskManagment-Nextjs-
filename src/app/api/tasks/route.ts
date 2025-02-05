@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import dbConnect from "@/lib/dbConnect";
 import Task from "@/models/Task";
+import mongoose from "mongoose";
 
 export async function POST(req: Request) {
   await dbConnect();
@@ -86,6 +87,10 @@ export async function DELETE(req: Request) {
       );
     }
 
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return NextResponse.json({ error: "Invalid Task ID" }, { status: 400 });
+    }
+
     const deleteTask = await Task.findByIdAndDelete(id);
 
     if (!deleteTask) {
@@ -93,7 +98,7 @@ export async function DELETE(req: Request) {
     }
 
     return NextResponse.json({
-      msg: "Task updated successfully",
+      msg: "Task deleted successfully",
       task: deleteTask,
     });
   } catch (error) {
