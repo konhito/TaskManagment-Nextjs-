@@ -1,2 +1,2 @@
-const Backend_url = "http://localhost:3000";
+const Backend_url = "https://task-managment-nextjs-jrnd.vercel.app/";
 export default Backend_url;
