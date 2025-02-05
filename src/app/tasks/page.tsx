@@ -1,11 +1,16 @@
 import TaskForm from "@/components/TaskForm";
 import TaskList from "@/components/TaskList";
-import Task from "@/models/Task";
+import { ThemeProvider } from "@/components/theme-context";
 export default function Tasks() {
   return (
     <>
-      <TaskForm />
-      <TaskList />
+      <ThemeProvider attribute="class"
+        defaultTheme="dark"
+        enableSystem
+        disableTransitionOnChange>
+        <TaskForm />
+        <TaskList />
+      </ThemeProvider>
     </>
   );
 }

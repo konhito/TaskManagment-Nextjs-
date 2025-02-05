@@ -31,12 +31,12 @@ export default function TaskForm() {
   }
 
   return (
-    <div className="fixed bottom-6 left-6 z-50">
+    <div className="fixed bottom-10 right-20 z-50">
       {!isOpen && (
         <motion.button
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          whileHover={{ scale: 1.1 }}
+          initial={{ scale: 1.2 }}
+          animate={{ scale: 1.3 }}
+          whileHover={{ scale: 1.5 }}
           whileTap={{ scale: 0.9 }}
           onClick={() => setIsOpen(true)}
           className="p-4 bg-blue-500 text-white rounded-full shadow-lg flex items-center justify-center"
@@ -59,35 +59,34 @@ export default function TaskForm() {
             <X size={20} />
           </button>
           <h2 className="text-lg font-semibold mb-4">Add New Task</h2>
-          <div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
-            <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-              <input
-                placeholder="Title"
-                type="text"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                className="border rounded p-2 w-full"
-              />
-              <textarea
-                placeholder="Description"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                className="border rounded p-2 w-full"
-              />
-              <input
-                type="date"
-                value={date}
-                onChange={(e) => setDate(e.target.value)}
-                className="border rounded p-2 w-full"
-              />
-              <button
-                type="submit"
-                className="bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600"
-              >
-                Submit
-              </button>
-            </form>
-          </div>
+
+          <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+            <input
+              placeholder="Title"
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              className="border rounded p-2 w-full"
+            />
+            <textarea
+              placeholder="Description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              className="border rounded p-2 w-full"
+            />
+            <input
+              type="date"
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
+              className="border rounded p-2 w-full"
+            />
+            <button
+              type="submit"
+              className="bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600"
+            >
+              Submit
+            </button>
+          </form>
         </motion.div>
       )}
     </div>

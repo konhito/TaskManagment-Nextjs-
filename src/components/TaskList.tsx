@@ -56,7 +56,7 @@ export default function TaskList() {
 
   return (
     <div className="max-w-2xl mx-auto p-6">
-      <h1 className="text-3xl font-bold text-center mb-6">Task List</h1>
+      <h1 className="text-3xl font-bold text-center mb-6">Task Managment</h1>
       <motion.ul
         className="space-y-4"
         initial={{ opacity: 0 }}
@@ -79,7 +79,7 @@ export default function TaskList() {
               </div>
               <div className="flex space-x-2">
                 <button
-                  className="px-3 py-1 bg-blue-500 text-white rounded-lg"
+                  className="px-8 py-2 rounded-full relative bg-slate-700 text-white text-sm hover:shadow-2xl hover:shadow-white/[0.1] transition duration-200 border border-slate-600"
                   onClick={() => {
                     setEditedTask({
                       id: task._id,
@@ -89,10 +89,12 @@ export default function TaskList() {
                     setIsEditing(true);
                   }}
                 >
-                  Edit
+                  <div className="absolute inset-x-0 h-px w-1/2 mx-auto -top-px  shadow-2xl  bg-gradient-to-r from-transparent via-teal-500 to-transparent" />
+                  <span className="relative z-20">Edit</span>
                 </button>
+
                 <button
-                  className="px-3 py-1 bg-red-500 text-white rounded-lg"
+                  className="px-6 py-2 rounded-full bg-red-500 text-white "
                   onClick={() => deleteTask(task._id)}
                 >
                   Delete
